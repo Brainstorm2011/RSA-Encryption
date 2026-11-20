@@ -1,7 +1,6 @@
 import sys
 from random import choice, randint
 from math import *
-from time import sleep
 
 sys.set_int_max_str_digits(100000) # Increases string limit to allow for more data
 
@@ -39,24 +38,14 @@ def encrypt_RSA(message, e, n): # Encrypts using RSA
     
     return encrypted
  
-def decrypt_RSA(): # Decrypts using RSA
-    d = int(input("Please enter your d value ")) # Asks for the d value
-    n = int(input("Please enter your n value ")) # Asks for the n value
-    
-    message = input("Please enter the list of numbers you would like to decrypt ")
+def decrypt_RSA(message, d, n): # Decrypts using RSA
     nums = message.split(" ")
-    print("Decryption in progress...")
-    sleep(0.5)
     for i in range(len(nums)):
         nums[i] = (int(nums[i]) ** d) % n # Raises each character of the message to d and modulo n
         
-    print("Decrypted message complete")
-    sleep(0.5)
-    print("Charactered message in progress...")
     decrypted = charify(nums) # Converts ASCII back into characters
-    print("Charactered message complete")
-    sleep(0.5)
-    print(decrypted) 
+    
+    return decrypted
    
 def numify(message):
     num = []
