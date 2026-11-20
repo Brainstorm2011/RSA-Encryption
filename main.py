@@ -5,53 +5,16 @@ from time import sleep
 
 sys.set_int_max_str_digits(100000) # Increases string limit to allow for more data
 
-def calculate_RSA(): # Calculates the e, d, n and phi n values for rsa
-    global p, q, e, d, n, phin
-    isprime = False
-    
-    f = open("pns.txt", 'r')
-    primes = f.read().splitlines()
-    f.close()
-    
-    while isprime == False:
-        p = int(input("Enter a prime number(Greater than 11) ")) # Asks for first prime - p
-        if str(p) in primes and p > 11: # Makes sure the prime number is a prime number
-            isprime = True
-        else:
-            print("Not a prime/Under 11")
-    
-    isprime = False
-           
-    while isprime == False:
-        q = int(input("Enter another prime number(Greater than 13) ")) # Asks for second prime - q
-        if q != p and str(q) in primes and q > 13: # Makes sure the rpime number is a prime number
-            isprime = True
-        else:
-            print("Not prime/Under 13/Isn't a different prime")
-    
+def calculate_RSA(p, q): # Calculates the e, d, n and phi n values for rsa
     n = p * q # Calculates n
-    sleep(0.5)
-    print("'n' Calculated")
     phin = (p - 1) * (q - 1) # Calculates phi n
     
-    calculate_e() # Calls the function to calculate e
-    sleep(0.5)
-    print("'e' Calculated")
-    calculate_d() # Calls the function to calculate d
-    sleep(0.5)
-    print("'d' Calculated")
+    e = calculate_e(n, phin) # Calls the function to calculate e
+    d = calculate_d(phin, e) # Calls the function to calculate d
     
-    sleep(1)
-    print("RSA values calculated") # Gives the user the e, d and n values
-    print(f"Your n value is {n}")
-    print(f"Your e value is {e}")
-    print(f"Your d value is {d}")
-    print("Please keep these values saved")
-    print("You can share your e and n value")
-    print("Don't share your d value")
+    return e, d
 
-def calculate_e(): # Calculates the e value
-    global p, q, e, d, n, phin
+def calculate_e(n, phin): # Calculates the e value
     coprimes = []
     
     for i in range(phin - 2): # Loops through every value greater than 1 but less than phi n
@@ -59,15 +22,15 @@ def calculate_e(): # Calculates the e value
             if gcd((i + 2), n) == 1:
                 coprimes.append(i + 2) # Adds the value to the list
     e = choice(coprimes) # Chooses a random value from the list and sets e to it
+    return e
     
-def calculate_d(): # Calculate the d value
-    global p, q, e, d, n, phin
-    
+def calculate_d(phin, e): # Calculate the d value
     for i in range(phin * 9): # Loops through numbers that ehn multiplied by e and modded by phi n gives 1
         if (i * e) % phin == 1 and i != e:
             if randint(1, 100) > 50:
                 d = i  # Sets the value of d
                 break
+    return d
 
 def encrypt_RSA(): # Encrypts using RSA
     e = int(input("Please enter your e value ")) # Asks for the e value
