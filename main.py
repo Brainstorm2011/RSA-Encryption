@@ -134,33 +134,3 @@ def convertString(l):
         string += l[i]
     
     return string
-
-def main():
-    print("RSA Encryption and Decryption Program")
-    while True:
-        print("""Options:
-            1. Create Keys
-            2. Encrypt
-            3. Decrypt
-            4. Exit
-            """)
-        choice = input("Please enter one of the options(1, 2, 3 or 4) ")
-        if choice == "1":
-            calculate_RSA()
-        elif choice == "2":
-            encrypt_RSA()
-        elif choice == "3":
-            decrypt_RSA()
-        elif choice == "4":
-            print("Exiting...")
-            sleep(0.5)
-            break
-        else:
-            print("Please choose a valid option")
-        
-        sleep(5)
-        print("#"*100)
-        sleep(1)
-        
-if __name__ == "__main__":
-    main()
