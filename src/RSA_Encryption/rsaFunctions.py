@@ -39,10 +39,10 @@ def encrypt_RSA(message, e, n): # Encrypts using RSA
     return encrypted
  
 def decrypt_RSA(message, d, n): # Decrypts using RSA
-    for i in range(len(nums)):
-        nums[i] = (int(nums[i]) ** d) % n # Raises each character of the message to d and modulo n
+    for i in range(len(message)):
+        message[i] = (int(message[i]) ** d) % n # Raises each character of the message to d and modulo n
         
-    decrypted = charify(nums) # Converts ASCII back into characters
+    decrypted = charify(message) # Converts ASCII back into characters
     
     return decrypted
    
