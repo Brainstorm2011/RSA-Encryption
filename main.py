@@ -12,7 +12,7 @@ def calculate_RSA(p, q): # Calculates the e, d, n and phi n values for rsa
     e = calculate_e(n, phin) # Calls the function to calculate e
     d = calculate_d(phin, e) # Calls the function to calculate d
     
-    return e, d
+    return {"e" : e, "d" : d, "n" : n}
 
 def calculate_e(n, phin): # Calculates the e value
     coprimes = []
@@ -32,24 +32,12 @@ def calculate_d(phin, e): # Calculate the d value
                 break
     return d
 
-def encrypt_RSA(): # Encrypts using RSA
-    e = int(input("Please enter your e value ")) # Asks for the e value
-    n = int(input("Please enter your n value ")) # Asks for the n value
-    
-    message = input("Please enter the message you would like to encrypt ")
-    print("ASCII message in progress...")
-    sleep(0.5)
+def encrypt_RSA(message, e, n): # Encrypts using RSA
     encrypted = numify(message) # Converts the message into ASCII
-    print("ASCII message complete")
-    sleep(0.5)
-    print("Encrypting in progress...")
-    sleep(0.5)
     for i in range(len(encrypted)):
         encrypted[i] = (encrypted[i] ** e) % n # Raises each character of the message to e and modulo n 
-    print("Encrypting Complete")
-    sleep(0.5)
-    print(*encrypted)
-    print("Please copy the encrypted numbers, without modifying them")
+    
+    return encrypted
  
 def decrypt_RSA(): # Decrypts using RSA
     d = int(input("Please enter your d value ")) # Asks for the d value
