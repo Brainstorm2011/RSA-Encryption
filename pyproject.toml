@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "my-encryptor"
+name = "RSA-ENcryptor"
 version = "0.1.0"
-description = "Encryption module for save files"
+description = "RSA Encryption module for cryptography"
 requires-python = ">=3.8"
 dependencies = []
